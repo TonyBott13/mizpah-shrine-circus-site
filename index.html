@@ -92,13 +92,13 @@ p{margin:0}
 .nav{position:sticky;top:env(safe-area-inset-top,0px);z-index:40;background:var(--red);color:#fff;box-shadow:0 2px 0 var(--red-deep)}
 .nav .wrap{display:flex;align-items:center;gap:14px;min-height:62px}
 .nav img{height:44px;width:auto}
-.nav-links{display:flex;gap:18px;margin-left:auto;font-weight:900;font-size:15px}
+.nav-links{display:flex;gap:18px;margin-left:auto;font-weight:900;font-size:15px;white-space:nowrap}
 .nav-links a{text-decoration:none}
 .nav-links a:hover{text-decoration:underline;text-underline-offset:4px}
-.nav .btn{font-size:16px;padding:9px 16px}
-.menu-btn{display:none;background:transparent;border:2px solid rgba(255,255,255,.6);color:#fff;font:900 14px var(--font-body);border-radius:10px;padding:7px 11px;cursor:pointer}
+.nav .btn{font-size:16px;padding:9px 16px;white-space:nowrap}
+.menu-btn{display:none;min-width:64px;background:transparent;border:2px solid rgba(255,255,255,.6);color:#fff;font:900 14px var(--font-body);border-radius:10px;padding:7px 11px;cursor:pointer}
 /* language switch */
-.switch{display:inline-flex;align-items:center;gap:8px;background:transparent;border:0;color:#fff;font:900 13px var(--font-body);cursor:pointer;padding:4px 0;letter-spacing:.02em}
+.switch{display:inline-flex;align-items:center;gap:8px;background:transparent;border:0;color:#fff;font:900 13px var(--font-body);cursor:pointer;padding:4px 0;letter-spacing:.02em;flex:none;white-space:nowrap}
 .switch .lbl{opacity:1}
 .switch .lbl.on{text-decoration:underline;text-underline-offset:3px;text-decoration-thickness:2px}
 .switch .lbl .short{display:none}
@@ -353,12 +353,12 @@ fbq('init','286298531765295');fbq('track','PageView');
       <a href="#faq" data-i18n="nav_faq">Questions</a>
       <a href="#contact" data-i18n="nav_contact">Box Office</a>
     </div>
+    <a class="btn btn-yellow" href="#shows" data-i18n="nav_tickets">Get Tickets</a>
     <button class="switch" id="langSwitch" role="switch" aria-checked="false" aria-label="Language: English or Español">
       <span class="lbl on" id="lblEn"><span class="long">English</span><span class="short">EN</span></span>
       <span class="sw-track"><span class="sw-knob"></span></span>
       <span class="lbl" id="lblEs"><span class="long">Español</span><span class="short">ES</span></span>
     </button>
-    <a class="btn btn-yellow" href="#shows" data-i18n="nav_tickets">Get Tickets</a>
   </div>
 </nav>
 
@@ -704,7 +704,7 @@ fbq('init','286298531765295');fbq('track','PageView');
   $('#contactForm').addEventListener('submit',function(e){e.preventDefault();var f=this;if(!f.checkValidity()){$$('input,textarea',f).forEach(function(i){i.style.borderColor=i.validity.valid?'':'var(--red)'});return}
     var btn=$('button[type=submit]',f);btn.disabled=true;
     var data={name:$('#f-name').value,email:$('#f-email').value,message:$('#f-msg').value,_subject:'Website note: Mizpah Shrine Circus',_template:'table',_captcha:'false'};
-    fetch('https://formsubmit.co/ajax/tickets@mizpahshrinecircus.com',{method:'POST',headers:{'Content-Type':'application/json','Accept':'application/json'},body:JSON.stringify(data)})
+    fetch('https://formsubmit.co/ajax/info@creativetonemedia.com',{method:'POST',headers:{'Content-Type':'application/json','Accept':'application/json'},body:JSON.stringify(data)})
       .then(function(r){return r.json()}).then(function(j){if(j&&(j.success==='true'||j.success===true)){f.classList.add('sent');if(window.fbq)fbq('track','Lead')}else{throw new Error('send failed')}})
       .catch(function(){btn.disabled=false;var m=$('.form-error',f);if(!m){m=document.createElement('p');m.className='form-error';m.style.cssText='color:var(--red-deep);font-weight:700';f.appendChild(m)}m.textContent=(lang==='es'?'No se pudo enviar. Escríbenos a tickets@mizpahshrinecircus.com':'Could not send. Email us at tickets@mizpahshrinecircus.com')});
   });
