@@ -566,7 +566,7 @@ fbq('init','286298531765295');fbq('track','PageView');
     <div class="contact-grid">
       <div class="addr">
         <div class="block"><b data-i18n="bo1">Memorial Coliseum Ticket Office</b><span>4000 Parnell Ave, Fort Wayne, IN 46805</span><span data-i18n="bo_hours">Mon–Fri 10 AM to 5 PM · Sat and Sun closed</span><span><a href="tel:+12604831111">(260) 483-1111</a></span><span data-i18n="bo_dir">How to get there: drive east on Coliseum Blvd. Turn right into the circle drive at Entrance 6. Park and walk into the Arena &amp; Expo Center lobby.</span></div>
-        <div class="block"><b data-i18n="bo2">Mizpah Shrine Office</b><span data-i18n="bo2_note"><i>This is not the Coliseum box office.</i></span><span data-i18n="bo2_addr">1015 Memorial Way, Fort Wayne, IN 46805. It is in the Kroger parking lot (Kroger is at 4120 N. Clinton St.). Enter from Parnell Ave or N. Clinton St.</span><span data-i18n="bo2_hours">Office hours: Mon–Thu 8 AM to 3 PM</span><span><span data-i18n="circus_phone">Circus office phone:</span> <a href="tel:+12602342172">(260) 234-2172</a></span><span class="copy-line">info@mizpahshrinecircus.com <button class="copy-btn" type="button" data-copy="info@mizpahshrinecircus.com" data-i18n="copy_short">Copy</button></span></div>
+        <div class="block"><b data-i18n="bo2">Mizpah Shrine Office</b><span data-i18n="bo2_note"><i>This is not the Coliseum box office.</i></span><span id="boBuy"></span><span data-i18n="bo2_addr">1015 Memorial Way, Fort Wayne, IN 46805. It is in the Kroger parking lot (Kroger is at 4120 N. Clinton St.). Enter from Parnell Ave or N. Clinton St.</span><span data-i18n="bo2_hours">Office hours: Mon–Thu 8 AM to 3 PM</span><span><span data-i18n="circus_phone">Circus office phone:</span> <a href="tel:+12602342172">(260) 234-2172</a></span><span class="copy-line">info@mizpahshrinecircus.com <button class="copy-btn" type="button" data-copy="info@mizpahshrinecircus.com" data-i18n="copy_short">Copy</button></span></div>
         <div class="block"><b data-i18n="follow">Follow along</b><span><a href="https://www.facebook.com/mizpahshrinecircus" target="_blank" rel="noopener">Facebook</a> · <a href="https://www.instagram.com/mizpahshrinecircus/" target="_blank" rel="noopener">Instagram</a></span></div>
       </div>
       <form id="contactForm" novalidate>
@@ -675,8 +675,8 @@ fbq('init','286298531765295');fbq('track','PageView');
     sticky_label:"Ahorra $8 en asientos de $18",foot_privacy:"Política de privacidad",foot_access:"Accesibilidad",foot_cookie:"Usamos el píxel de Meta para medir nuestros anuncios."
   };
   var DYN={
-    en:{cta_presale:'Tickets on sale Nov 26',cta_tickets:'Get Tickets',cta_post:'See you next year',cd_presale:'Tickets go on sale Nov 26',cd_onsale:'The first show starts in',btn_presale:'On sale Nov 26',btn_onsale:'Get tickets',btn_post:'Show is over'},
-    es:{cta_presale:'Boletos a la venta el 26 de nov',cta_tickets:'Comprar boletos',cta_post:'Nos vemos el próximo año',cd_presale:'Boletos a la venta el 26 de nov',cd_onsale:'La primera función empieza en',btn_presale:'Venta: 26 nov',btn_onsale:'Comprar boletos',btn_post:'Función terminada'}
+    en:{cta_presale:'Tickets on sale Nov 26',cta_tickets:'Get Tickets',cta_post:'See you next year',cd_presale:'Tickets go on sale Nov 26',cd_onsale:'The first show starts in',btn_presale:'On sale Nov 26',btn_onsale:'Get tickets',btn_post:'Show is over',buy_presale:'To buy tickets in person, visit the Memorial Coliseum box office (tickets go on sale Nov 26).',buy_onsale:'To buy tickets in person, visit the Memorial Coliseum box office.'},
+    es:{cta_presale:'Boletos a la venta el 26 de nov',cta_tickets:'Comprar boletos',cta_post:'Nos vemos el próximo año',cd_presale:'Boletos a la venta el 26 de nov',cd_onsale:'La primera función empieza en',btn_presale:'Venta: 26 nov',btn_onsale:'Comprar boletos',btn_post:'Función terminada',buy_presale:'Para comprar boletos en persona, visita la taquilla del Memorial Coliseum (a la venta desde el 26 de nov).',buy_onsale:'Para comprar boletos en persona, visita la taquilla del Memorial Coliseum.'}
   };
   var EN={};
   $$('[data-i18n]').forEach(function(el){EN[el.getAttribute('data-i18n')]=el.innerHTML});
@@ -728,6 +728,7 @@ fbq('init','286298531765295');fbq('track','PageView');
   }
   function applyMode(){
     applyCode();
+    var bb=$('#boBuy');if(bb){bb.textContent=mode==='post'?'':T(mode==='presale'?'buy_presale':'buy_onsale');bb.style.display=mode==='post'?'none':''}
     var hero=$('#heroCta'),sticky=$('#stickyCta'),cd=$('#countdown'),label=$('#cdLabel'),btns=$$('.show-btn');
     if(mode==='presale'){
       hero.textContent=T('cta_presale');hero.href='#shows';sticky.textContent=T('cta_presale');sticky.href='#shows';cd.hidden=false;label.textContent=T('cd_presale');
